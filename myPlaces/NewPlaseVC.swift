@@ -30,10 +30,10 @@ class NewPlaseVC: UITableViewController {
             
             let camera = UIAlertAction(title: "Camera", style: .default) { _ in
                 
-//                let cameraAlert = UIAlertController(title: "Camera", message: "Camera not found", preferredStyle: .alert)
-//                let okAllert = UIAlertAction(title: "OK", style: .cancel)
-//                cameraAlert.addAction(okAllert)
-//                self.present(cameraAlert, animated: true)
+                let cameraAlert = UIAlertController(title: "Camera", message: "Camera not found", preferredStyle: .alert)
+                let okAllert = UIAlertAction(title: "OK", style: .cancel)
+                cameraAlert.addAction(okAllert)
+                self.present(cameraAlert, animated: true)
             }
             camera.setValue(cameraIcon, forKey: "image")
             camera.setValue(CATextLayerAlignmentMode.left, forKey: "titleTextAlignment")
