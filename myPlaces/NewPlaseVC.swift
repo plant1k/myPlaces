@@ -16,6 +16,8 @@ class NewPlaseVC: UITableViewController {
     
     var imageIsChanged = false
     
+    var currentPlace: Place?
+    
    
     
     
@@ -28,6 +30,7 @@ class NewPlaseVC: UITableViewController {
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
         
+        setupEditScreen()
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -84,6 +87,27 @@ class NewPlaseVC: UITableViewController {
         
         
         StorageManager.saveObject(newPlace)
+    }
+    
+    private func setupEditScreen() {
+        if currentPlace != nil {
+            setupNavBar()
+            guard let data = currentPlace?.imageData, let image = UIImage(data: data) else {return}
+            placeImage.image = image
+            placeImage.contentMode = .scaleAspectFill
+            placeName.text = currentPlace?.name
+            placeType.text = currentPlace?.type
+            placeLocation.text = currentPlace?.location
+        }
+    }
+    
+    private func setupNavBar() {
+        if let topItem = navigationController?.navigationBar.topItem {
+            topItem.backBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: nil, action: nil)
+        }
+        navigationItem.leftBarButtonItem = nil
+        title = currentPlace?.name
+        saveButton.isEnabled = true
     }
     
     @IBAction func cancelAction(_ sender: UIBarButtonItem) {
