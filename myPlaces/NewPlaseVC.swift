@@ -18,7 +18,7 @@ class NewPlaseVC: UITableViewController {
     
     var currentPlace: Place?
     
-   
+    
     
     
     override func viewDidLoad() {
@@ -73,7 +73,7 @@ class NewPlaseVC: UITableViewController {
         }
     }
     
-    func saveNewPlace() {
+    func savePlace() {
         var image: UIImage?
         
         if imageIsChanged {
@@ -85,12 +85,21 @@ class NewPlaseVC: UITableViewController {
         
         let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
         
-        
-        StorageManager.saveObject(newPlace)
+        if currentPlace != nil {
+            try! realm.write{
+                currentPlace?.name = newPlace.name
+                currentPlace?.location = newPlace.location
+                currentPlace?.type = newPlace.type
+                currentPlace?.imageData = newPlace.imageData
+            }
+        } else {
+            StorageManager.saveObject(newPlace)
+        }
     }
     
     private func setupEditScreen() {
         if currentPlace != nil {
+            imageIsChanged = true
             setupNavBar()
             guard let data = currentPlace?.imageData, let image = UIImage(data: data) else {return}
             placeImage.image = image

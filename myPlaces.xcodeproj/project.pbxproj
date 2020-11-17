@@ -124,16 +124,16 @@
 		0743CBFE255983B300A320B6 /* myPlaces */ = {
 			isa = PBXGroup;
 			children = (
-				072E25E92563EEB000B05C4A /* StorageManager.swift */,
 				0743CBFF255983B300A320B6 /* AppDelegate.swift */,
+				072E25E92563EEB000B05C4A /* StorageManager.swift */,
 				0743CC01255983B300A320B6 /* SceneDelegate.swift */,
 				0743CC35255986A800A320B6 /* MainViewController.swift */,
 				072CAD39255C61070077F06F /* PlaceModel.swift */,
 				0743CC44255AA3A100A320B6 /* CustomTableViewCell.swift */,
-				0743CC05255983B300A320B6 /* Main.storyboard */,
 				072CAD3E255D38DF0077F06F /* NewPlaseVC.swift */,
-				0743CC08255983B600A320B6 /* Assets.xcassets */,
+				0743CC05255983B300A320B6 /* Main.storyboard */,
 				0743CC0A255983B600A320B6 /* LaunchScreen.storyboard */,
+				0743CC08255983B600A320B6 /* Assets.xcassets */,
 				0743CC0D255983B600A320B6 /* Info.plist */,
 			);
 			path = myPlaces;

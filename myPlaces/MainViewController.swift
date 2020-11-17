@@ -8,11 +8,15 @@
 import UIKit
 import RealmSwift
 
-class TableViewController: UITableViewController {
-
-
+class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var reversedSortedButton: UIBarButtonItem!
+    
     
     var plases: Results<Place>!
+    var ascendingSorting = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,55 +25,55 @@ class TableViewController: UITableViewController {
     }
     
     
-     //MARK: - Table view data source
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+    //MARK: - Table view data source
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return plases.isEmpty ? 0 : plases.count
     }
-
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-
+        
         let place = plases[indexPath.row]
-
+        
         cell.nameLable.text = place.name
-
+        
         cell.imageOfPlase.layer.cornerRadius = cell.imageOfPlase.frame.size.height / 2
         cell.imageOfPlase.clipsToBounds = true
         cell.locationLable.text = place.location
         cell.typeLable.text = place.type
         cell.imageOfPlase.image = UIImage(data: place.imageData!)
         
-
+        
         return cell
     }
-
- // MARK: Table View delegate
-//
-//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let place = plases[indexPath.row]
-//
-//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
-//            StorageManager.deleteObjc(place)
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//
-//        }
-//
-//        return UISwipeActionsConfiguration(actions: [deleteAction])
-//    }
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+    
+    // MARK: Table View delegate
+    //
+    //    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    //        let place = plases[indexPath.row]
+    //
+    //        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
+    //            StorageManager.deleteObjc(place)
+    //            tableView.deleteRows(at: [indexPath], with: .automatic)
+    //
+    //        }
+    //
+    //        return UISwipeActionsConfiguration(actions: [deleteAction])
+    //    }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let place = plases[indexPath.row]
             StorageManager.deleteObjc(place)
             tableView.deleteRows(at: [indexPath], with: .automatic)
         }
     }
-
-   
-     //MARK: - Navigation
-
+    
+    
+    //MARK: - Navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else {return}
@@ -87,9 +91,35 @@ class TableViewController: UITableViewController {
         
         guard let newPlceVC = segue.source as? NewPlaseVC else {return}
         
-        newPlceVC.saveNewPlace()
-
+        newPlceVC.savePlace()
+        
         tableView.reloadData()
     }
     
+    @IBAction func reversedSorted(_ sender: UIBarButtonItem) {
+        
+        ascendingSorting.toggle()
+        
+        if ascendingSorting == true {
+            reversedSortedButton.image = #imageLiteral(resourceName: "AZ")
+        } else {
+            reversedSortedButton.image = #imageLiteral(resourceName: "ZA")
+        }
+        sorting()
+    }
+    
+    
+    @IBAction func sortControl(_ sender: UISegmentedControl) {
+        sorting()
+    }
+    
+    private func sorting() {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            plases = plases.sorted(byKeyPath: "date", ascending: ascendingSorting)
+        } else {
+            plases = plases.sorted(byKeyPath: "name", ascending: ascendingSorting)
+        }
+        tableView.reloadData()
+    }
 }
+
