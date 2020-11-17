@@ -46,7 +46,26 @@ class TableViewController: UITableViewController {
         return cell
     }
 
-
+ // MARK: Table View delegate
+//
+//    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+//        let place = plases[indexPath.row]
+//
+//        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (_, _, _) in
+//            StorageManager.deleteObjc(place)
+//            tableView.deleteRows(at: [indexPath], with: .automatic)
+//
+//        }
+//
+//        return UISwipeActionsConfiguration(actions: [deleteAction])
+//    }
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let place = plases[indexPath.row]
+            StorageManager.deleteObjc(place)
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        }
+    }
 
     /*
     // MARK: - Navigation
