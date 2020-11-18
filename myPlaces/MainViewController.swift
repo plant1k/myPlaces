@@ -19,6 +19,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         return text.isEmpty
     }
     
+    private var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
+    }
+    
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -46,7 +50,10 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     //MARK: - Table view data source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        if isFiltering {
+            
+            return filtredPlaces.count
+        }
         return plases.isEmpty ? 0 : plases.count
     }
     
@@ -54,7 +61,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        let place = plases[indexPath.row]
+        var place = Place()
+       
+        if isFiltering {
+            place = filtredPlaces[indexPath.row]
+        } else {
+            place = plases[indexPath.row]
+        }
         
         cell.nameLable.text = place.name
         
