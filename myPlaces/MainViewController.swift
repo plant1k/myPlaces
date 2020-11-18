@@ -29,7 +29,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     @IBOutlet weak var reversedSortedButton: UIBarButtonItem!
     
     
-
+    
     
     
     override func viewDidLoad() {
@@ -62,7 +62,7 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
         var place = Place()
-       
+        
         if isFiltering {
             place = filtredPlaces[indexPath.row]
         } else {
@@ -108,7 +108,12 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else {return}
-            let place = plases[indexPath.row]
+            let place: Place
+            if isFiltering {
+                place = filtredPlaces[indexPath.row]
+            } else {
+                place = plases[indexPath.row]
+            }
             
             let newPlaceVC = segue.destination as! NewPlaseVC
             newPlaceVC.currentPlace = place
