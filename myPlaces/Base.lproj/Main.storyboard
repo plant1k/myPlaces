@@ -179,6 +179,21 @@
             </objects>
             <point key="canvasLocation" x="1532" y="86"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="Sf4-lj-4ZE">
+            <objects>
+                <viewController id="Alq-0d-Q31" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3Dv-A7-xxT">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="mE6-VK-yU5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zdB-6N-RjZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-978.26086956521749" y="85.714285714285708"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pah-zM-eAx">
             <objects>
@@ -229,9 +244,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3kA-gh-862">
-                                <rect key="frame" x="0.0" y="127" width="414" height="770"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="85" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="3kA-gh-862">
+                                <rect key="frame" x="0.0" y="119" width="414" height="777"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="9KJ-by-i8o" customClass="CustomTableViewCell" customModule="myPlaces" customModuleProvider="target">
@@ -295,9 +309,8 @@
                                     <outlet property="delegate" destination="AYP-oI-j25" id="Iuu-3V-Mzn"/>
                                 </connections>
                             </tableView>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="Ooq-a5-uPO">
-                                <rect key="frame" x="0.0" y="92" width="414" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ooq-a5-uPO">
+                                <rect key="frame" x="0.0" y="88" width="414" height="32"/>
                                 <segments>
                                     <segment title="Date"/>
                                     <segment title="Name"/>
@@ -309,6 +322,15 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="dNL-XG-SdV"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Ooq-a5-uPO" firstAttribute="trailing" secondItem="dNL-XG-SdV" secondAttribute="trailing" id="Aub-mo-cY8"/>
+                            <constraint firstItem="Ooq-a5-uPO" firstAttribute="leading" secondItem="dNL-XG-SdV" secondAttribute="leading" id="Sy0-vR-g6H"/>
+                            <constraint firstAttribute="bottom" secondItem="3kA-gh-862" secondAttribute="bottom" id="Yxr-R3-xM9"/>
+                            <constraint firstItem="3kA-gh-862" firstAttribute="trailing" secondItem="Ooq-a5-uPO" secondAttribute="trailing" id="c0X-Bs-7yt"/>
+                            <constraint firstItem="Ooq-a5-uPO" firstAttribute="top" secondItem="dNL-XG-SdV" secondAttribute="top" id="lxg-o0-ouJ"/>
+                            <constraint firstItem="3kA-gh-862" firstAttribute="top" secondItem="Ooq-a5-uPO" secondAttribute="bottom" id="sJO-Gc-kXs"/>
+                            <constraint firstItem="3kA-gh-862" firstAttribute="leading" secondItem="dNL-XG-SdV" secondAttribute="leading" id="vJx-I8-awO"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="jPO-8U-hih">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="AZ" id="5ug-IY-3OJ">
