@@ -9,19 +9,37 @@ import UIKit
 import RealmSwift
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var plases: Results<Place>!
+    private var filtredPlaces: Results<Place>!
+    private var ascendingSorting = true
+    private var searchBarIsEmpty: Bool {
+        guard let text = searchController.searchBar.text else { return false }
+        return text.isEmpty
+    }
+    
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var reversedSortedButton: UIBarButtonItem!
     
     
-    var plases: Results<Place>!
-    var ascendingSorting = true
+
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         plases = realm.objects(Place.self)
+        
+        //Set the search controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search"
+        navigationItem.searchController = searchController
+        definesPresentationContext = false
+        
     }
     
     
@@ -122,4 +140,20 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.reloadData()
     }
 }
+
+extension TableViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        filterContentForSearchText(searchController.searchBar.text!)
+    }
+    private func filterContentForSearchText(_ searchText: String) {
+        
+        filtredPlaces = plases.filter("name CONTAINS[c] %@ OR location CONTAINS[c] %@", searchText, searchText)
+        tableView.reloadData()
+    }
+}
+
+
+
+
 
