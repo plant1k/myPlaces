@@ -145,6 +145,23 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="140" id="qdr-Hf-Hg5">
+                                        <rect key="frame" x="0.0" y="503" width="414" height="140"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="qdr-Hf-Hg5" id="E0K-kE-KTb">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="140"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="252" placeholderIntrinsicHeight="44" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="c7a-AX-oFy" customClass="RatingControl" customModule="myPlaces" customModuleProvider="target">
+                                                    <rect key="frame" x="81" y="48" width="252" height="44"/>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="c7a-AX-oFy" firstAttribute="centerY" secondItem="E0K-kE-KTb" secondAttribute="centerY" id="TRG-Qa-UsP"/>
+                                                <constraint firstItem="c7a-AX-oFy" firstAttribute="centerX" secondItem="E0K-kE-KTb" secondAttribute="centerX" id="mMG-7R-18h"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -177,22 +194,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="acc-39-2Q4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="7Es-Pr-s2a" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1532" y="86"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Sf4-lj-4ZE">
-            <objects>
-                <viewController id="Alq-0d-Q31" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="3Dv-A7-xxT">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="mE6-VK-yU5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zdB-6N-RjZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-978.26086956521749" y="85.714285714285708"/>
+            <point key="canvasLocation" x="1609" y="86"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pah-zM-eAx">
@@ -325,8 +327,8 @@
                         <constraints>
                             <constraint firstItem="Ooq-a5-uPO" firstAttribute="trailing" secondItem="dNL-XG-SdV" secondAttribute="trailing" id="Aub-mo-cY8"/>
                             <constraint firstItem="Ooq-a5-uPO" firstAttribute="leading" secondItem="dNL-XG-SdV" secondAttribute="leading" id="Sy0-vR-g6H"/>
-                            <constraint firstAttribute="bottom" secondItem="3kA-gh-862" secondAttribute="bottom" id="Yxr-R3-xM9"/>
                             <constraint firstItem="3kA-gh-862" firstAttribute="trailing" secondItem="Ooq-a5-uPO" secondAttribute="trailing" id="c0X-Bs-7yt"/>
+                            <constraint firstItem="3kA-gh-862" firstAttribute="bottom" secondItem="DKq-14-qTI" secondAttribute="bottom" id="fVe-rD-7pJ"/>
                             <constraint firstItem="Ooq-a5-uPO" firstAttribute="top" secondItem="dNL-XG-SdV" secondAttribute="top" id="lxg-o0-ouJ"/>
                             <constraint firstItem="3kA-gh-862" firstAttribute="top" secondItem="Ooq-a5-uPO" secondAttribute="bottom" id="sJO-Gc-kXs"/>
                             <constraint firstItem="3kA-gh-862" firstAttribute="leading" secondItem="dNL-XG-SdV" secondAttribute="leading" id="vJx-I8-awO"/>
@@ -352,9 +354,14 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OBl-9v-poE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="690" y="86"/>
+            <point key="canvasLocation" x="688.40579710144937" y="85.714285714285708"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="c7a-AX-oFy">
+            <size key="intrinsicContentSize" width="252" height="44"/>
+        </designable>
+    </designables>
     <inferredMetricsTieBreakers>
         <segue reference="gmP-UE-tRS"/>
     </inferredMetricsTieBreakers>

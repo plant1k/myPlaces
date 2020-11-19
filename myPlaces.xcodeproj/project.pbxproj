@@ -10,6 +10,7 @@
 		072CAD3A255C61070077F06F /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072CAD39255C61070077F06F /* PlaceModel.swift */; };
 		072CAD3F255D38DF0077F06F /* NewPlaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072CAD3E255D38DF0077F06F /* NewPlaseVC.swift */; };
 		072E25EA2563EEB000B05C4A /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 072E25E92563EEB000B05C4A /* StorageManager.swift */; };
+		0739CB762566D70F00E58B43 /* RatingControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0739CB752566D70F00E58B43 /* RatingControl.swift */; };
 		0743CC00255983B300A320B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0743CBFF255983B300A320B6 /* AppDelegate.swift */; };
 		0743CC02255983B300A320B6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0743CC01255983B300A320B6 /* SceneDelegate.swift */; };
 		0743CC07255983B300A320B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0743CC05255983B300A320B6 /* Main.storyboard */; };
@@ -45,6 +46,7 @@
 		072CAD39255C61070077F06F /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		072CAD3E255D38DF0077F06F /* NewPlaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPlaseVC.swift; sourceTree = "<group>"; };
 		072E25E92563EEB000B05C4A /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		0739CB752566D70F00E58B43 /* RatingControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingControl.swift; sourceTree = "<group>"; };
 		0743CBFC255983B300A320B6 /* myPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0743CBFF255983B300A320B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0743CC01255983B300A320B6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				0743CC35255986A800A320B6 /* MainViewController.swift */,
 				072CAD39255C61070077F06F /* PlaceModel.swift */,
 				0743CC44255AA3A100A320B6 /* CustomTableViewCell.swift */,
+				0739CB752566D70F00E58B43 /* RatingControl.swift */,
 				072CAD3E255D38DF0077F06F /* NewPlaseVC.swift */,
 				0743CC05255983B300A320B6 /* Main.storyboard */,
 				0743CC0A255983B600A320B6 /* LaunchScreen.storyboard */,
@@ -422,6 +425,7 @@
 				072CAD3F255D38DF0077F06F /* NewPlaseVC.swift in Sources */,
 				0743CC00255983B300A320B6 /* AppDelegate.swift in Sources */,
 				072E25EA2563EEB000B05C4A /* StorageManager.swift in Sources */,
+				0739CB762566D70F00E58B43 /* RatingControl.swift in Sources */,
 				072CAD3A255C61070077F06F /* PlaceModel.swift in Sources */,
 				0743CC45255AA3A100A320B6 /* CustomTableViewCell.swift in Sources */,
 				0743CC02255983B300A320B6 /* SceneDelegate.swift in Sources */,
