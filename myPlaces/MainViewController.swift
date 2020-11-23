@@ -59,20 +59,18 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
-        
-        
         
         let place = isFiltering ? filtredPlaces[indexPath.row] : plases[indexPath.row]
         
         cell.nameLable.text = place.name
         
-
+        
         cell.locationLable.text = place.location
         cell.typeLable.text = place.type
         cell.imageOfPlase.image = UIImage(data: place.imageData!)
         cell.cosmos.rating = place.rating
-        
         
         return cell
     }
@@ -110,7 +108,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             guard let indexPath = tableView.indexPathForSelectedRow else {return}
             
             let place = isFiltering ? filtredPlaces[indexPath.row] : plases[indexPath.row]
-            
             
             let newPlaceVC = segue.destination as! NewPlaseVC
             newPlaceVC.currentPlace = place
