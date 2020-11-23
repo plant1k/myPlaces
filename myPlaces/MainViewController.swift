@@ -54,28 +54,24 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             
             return filtredPlaces.count
         }
-        return plases.isEmpty ? 0 : plases.count
+        return plases.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
         
-        var place = Place()
         
-        if isFiltering {
-            place = filtredPlaces[indexPath.row]
-        } else {
-            place = plases[indexPath.row]
-        }
+        
+        let place = isFiltering ? filtredPlaces[indexPath.row] : plases[indexPath.row]
         
         cell.nameLable.text = place.name
         
-        cell.imageOfPlase.layer.cornerRadius = cell.imageOfPlase.frame.size.height / 2
-        cell.imageOfPlase.clipsToBounds = true
+
         cell.locationLable.text = place.location
         cell.typeLable.text = place.type
         cell.imageOfPlase.image = UIImage(data: place.imageData!)
+        cell.cosmos.rating = place.rating
         
         
         return cell
@@ -112,12 +108,9 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showDetail" {
             guard let indexPath = tableView.indexPathForSelectedRow else {return}
-            let place: Place
-            if isFiltering {
-                place = filtredPlaces[indexPath.row]
-            } else {
-                place = plases[indexPath.row]
-            }
+            
+            let place = isFiltering ? filtredPlaces[indexPath.row] : plases[indexPath.row]
+            
             
             let newPlaceVC = segue.destination as! NewPlaseVC
             newPlaceVC.currentPlace = place

@@ -6,6 +6,7 @@ target 'myPlaces' do
   use_frameworks!
 
   pod 'RealmSwift'
+  pod 'Cosmos', '~> 23.0'
 
   target 'myPlacesTests' do
     inherit! :search_paths
