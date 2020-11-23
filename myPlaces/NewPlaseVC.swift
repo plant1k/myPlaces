@@ -15,8 +15,8 @@ class NewPlaseVC: UITableViewController {
     @IBOutlet weak var placeType: UITextField!
     
     var imageIsChanged = false
-    
-    var currentPlace: Place?
+    var currentPlace: Place!
+    @IBOutlet weak var rating: RatingControl!
     
     
     
@@ -25,7 +25,7 @@ class NewPlaseVC: UITableViewController {
         super.viewDidLoad()
         
         
-        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         
         saveButton.isEnabled = false
         placeName.addTarget(self, action: #selector(textFieldChanged), for: .editingChanged)
@@ -83,7 +83,7 @@ class NewPlaseVC: UITableViewController {
         }
         let imageData = image?.pngData()
         
-        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData)
+        let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData, rating: Double(rating.rating))
         
         if currentPlace != nil {
             try! realm.write{
@@ -91,6 +91,7 @@ class NewPlaseVC: UITableViewController {
                 currentPlace?.location = newPlace.location
                 currentPlace?.type = newPlace.type
                 currentPlace?.imageData = newPlace.imageData
+                currentPlace?.rating = newPlace.rating
             }
         } else {
             StorageManager.saveObject(newPlace)
@@ -107,6 +108,7 @@ class NewPlaseVC: UITableViewController {
             placeName.text = currentPlace?.name
             placeType.text = currentPlace?.type
             placeLocation.text = currentPlace?.location
+            rating.rating = Int(currentPlace.rating)
         }
     }
     
