@@ -274,6 +274,7 @@
                     </view>
                     <connections>
                         <outlet property="exit" destination="W8X-w5-cpI" id="QXC-qV-hOy"/>
+                        <outlet property="mapKit" destination="UrW-th-GGX" id="Fjg-KQ-CN7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWY-IG-jAb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
