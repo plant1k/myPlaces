@@ -260,11 +260,25 @@
                                     <action selector="exitAction" destination="Joa-wc-O0g" eventType="touchUpInside" id="7mw-SK-bC5"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee8-OU-1H8">
+                                <rect key="frame" x="324" y="783" width="50" height="39"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="Vlw-g7-IJ5"/>
+                                    <constraint firstAttribute="height" constant="39" id="abT-xc-F5E"/>
+                                </constraints>
+                                <state key="normal" image="location-off"/>
+                                <connections>
+                                    <action selector="centerCoordinate" destination="Joa-wc-O0g" eventType="touchUpInside" id="0KY-DE-bCI"/>
+                                    <action selector="locationCenterUser" destination="Joa-wc-O0g" eventType="touchUpInside" id="YtF-9E-eqW"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yPa-sw-Jav"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="yPa-sw-Jav" firstAttribute="trailing" secondItem="Ee8-OU-1H8" secondAttribute="trailing" constant="40" id="66G-Bm-uYW"/>
                             <constraint firstItem="UrW-th-GGX" firstAttribute="leading" secondItem="yPa-sw-Jav" secondAttribute="leading" id="9oU-kU-EgJ"/>
+                            <constraint firstItem="yPa-sw-Jav" firstAttribute="bottom" secondItem="Ee8-OU-1H8" secondAttribute="bottom" constant="40" id="KHA-BK-coe"/>
                             <constraint firstItem="UrW-th-GGX" firstAttribute="trailing" secondItem="yPa-sw-Jav" secondAttribute="trailing" id="OFX-Po-7AD"/>
                             <constraint firstItem="yPa-sw-Jav" firstAttribute="trailing" secondItem="W8X-w5-cpI" secondAttribute="trailing" constant="40" id="Tga-MJ-XKp"/>
                             <constraint firstAttribute="bottom" secondItem="UrW-th-GGX" secondAttribute="bottom" id="eav-cU-KGg"/>
@@ -479,6 +493,7 @@
         <image name="camcel" width="128" height="128"/>
         <image name="emptyStar" width="255" height="256"/>
         <image name="filledStar" width="237.5" height="238"/>
+        <image name="location-off" width="16" height="16"/>
         <image name="map" width="50" height="50"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

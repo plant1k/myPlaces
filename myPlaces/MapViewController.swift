@@ -7,14 +7,35 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
 class MapViewController: UIViewController {
     
-    var place: Place!
+    var place = Place()
     let annotationIdentifier = "annotationIdentifier"
+    let locationManager = CLLocationManager()
+    
+    
     
     @IBOutlet weak var exit: UIButton!
     @IBOutlet weak var mapKit: MKMapView!
+    
+    @IBAction func centerCoordinate() {
+        
+//        if let location = locationManager.location?.coordinate {
+//            let region = MKCoordinateRegion(center: location, latitudinalMeters: 100, longitudinalMeters: 100)
+//            mapKit.setRegion(region, animated: true)
+//            print("Zoom")
+//        } else {
+//            print("error")
+//        }
+    }
+    
+    @IBAction func exitAction() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
     
     
     override func viewDidLoad() {
@@ -22,12 +43,9 @@ class MapViewController: UIViewController {
         
         mapKit.delegate = self
         
-        setupPlaceMark()
         
-    }
-    
-    @IBAction func exitAction() {
-        dismiss(animated: true, completion: nil)
+        setupPlaceMark()
+        checkLoctionServices()
     }
     
     private func setupPlaceMark() {
@@ -57,8 +75,57 @@ class MapViewController: UIViewController {
             
         }
     }
+    
+    private func checkLoctionServices() {
+        
+        if CLLocationManager.locationServicesEnabled() {
+            print("OK")
+            setupLocationManager()
+             
+        } else {
+            self.showAlert(title: "Location disabled", message: "Turn on")
+        }
+        
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.authorizationStatus {
+        case .authorizedWhenInUse:
+            mapKit.showsUserLocation = true
+            break
+        case .denied:
+            showAlert(title: "Eroor", message: "Error")
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+            break
+        case .restricted:
+            break
+        case .authorizedAlways:
+            break
+        @unknown default:
+            print("New case")
+        }
+    }
+    
+    
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+    }
+ 
+    private func showAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
+    }
+    
 }
-
 
 extension MapViewController: MKMapViewDelegate {
     
@@ -82,8 +149,13 @@ extension MapViewController: MKMapViewDelegate {
             
             annotationView?.rightCalloutAccessoryView = imageView
         }
-  
+        
         
         return annotationView
     }
+}
+extension MapViewController: CLLocationManagerDelegate {
+    //    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+    //        checkLocationAuthorization(manager)
+    //    }
 }
