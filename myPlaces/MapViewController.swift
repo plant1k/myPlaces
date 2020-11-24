@@ -15,18 +15,20 @@ class MapViewController: UIViewController {
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
     let regionMeters = 1000.00
+    var incomeSegueIdentifier = ""
     
     
+    @IBOutlet weak var adress: UILabel!
     @IBOutlet weak var exit: UIButton!
     @IBOutlet weak var mapKit: MKMapView!
+    @IBOutlet weak var location: UIImageView!
+    @IBOutlet weak var doneButton: UIButton!
     
 
+    @IBAction func doneButtonPressed() {
+    }
     @IBAction func centerLocation(_ sender: Any) {
-        
-        if let location = locationManager.location?.coordinate {
-            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
-            mapKit.setRegion(region, animated: true)
-        }
+        showUserLocation()
     }
     
     @IBAction func exitAction() {
@@ -39,11 +41,21 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        adress.text = ""
         mapKit.delegate = self
         
         
-        setupPlaceMark()
+        setupMapView()
         checkLoctionServices()
+    }
+    
+    private func setupMapView() {
+        if incomeSegueIdentifier == "showPlace" {
+            setupPlaceMark()
+            location.isHidden = true
+            adress.isHidden = true
+            doneButton.isHidden = true
+        }
     }
     
     private func setupPlaceMark() {
@@ -90,6 +102,7 @@ class MapViewController: UIViewController {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse:
             mapKit.showsUserLocation = true
+            if incomeSegueIdentifier == "getAdress" { showUserLocation() }
             break
         case .denied:
             showAlert(title: "Eroor", message: "Error")
@@ -123,6 +136,21 @@ class MapViewController: UIViewController {
         present(alert, animated: true)
     }
     
+    private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+        
+        let latitude = mapView.centerCoordinate.latitude
+        let longitude = mapView.centerCoordinate.longitude
+        
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
+    private func showUserLocation() {
+
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
+            mapKit.setRegion(region, animated: true)
+        }
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -151,9 +179,39 @@ extension MapViewController: MKMapViewDelegate {
         
         return annotationView
     }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        let center = getCenterLocation(for: mapView)
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(center) { (placemarks, error) in
+            if let error = error {
+                print("\(error)")
+                return
+            }
+            
+            guard let placemarks = placemarks else { return }
+            
+            let placemark = placemarks.first
+            let streetName = placemark?.thoroughfare
+            let buildNumber = placemark?.subThoroughfare
+            
+            DispatchQueue.main.async {
+                
+                if streetName != nil && buildNumber != nil {
+                    self.adress.text = "\(streetName!), \(buildNumber!)"
+                } else if streetName != nil {
+                    self.adress.text = "\(streetName!)"
+                } else {
+                    self.adress.text = ""
+                }
+               
+            }
+        }
+    }
 }
+
 extension MapViewController: CLLocationManagerDelegate {
-    //    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-    //        checkLocationAuthorization(manager)
-    //    }
+    
 }
