@@ -260,25 +260,24 @@
                                     <action selector="exitAction" destination="Joa-wc-O0g" eventType="touchUpInside" id="7mw-SK-bC5"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ee8-OU-1H8">
-                                <rect key="frame" x="324" y="783" width="50" height="39"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abP-Q0-opp">
+                                <rect key="frame" x="348" y="790" width="16" height="22"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Vlw-g7-IJ5"/>
-                                    <constraint firstAttribute="height" constant="39" id="abT-xc-F5E"/>
+                                    <constraint firstAttribute="height" constant="22" id="Vtx-FZ-Mth"/>
+                                    <constraint firstAttribute="width" constant="16" id="pNz-uO-NWa"/>
                                 </constraints>
                                 <state key="normal" image="location-off"/>
                                 <connections>
-                                    <action selector="centerCoordinate" destination="Joa-wc-O0g" eventType="touchUpInside" id="0KY-DE-bCI"/>
-                                    <action selector="locationCenterUser" destination="Joa-wc-O0g" eventType="touchUpInside" id="YtF-9E-eqW"/>
+                                    <action selector="centerLocation:" destination="Joa-wc-O0g" eventType="touchUpInside" id="OVi-3r-vZJ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="yPa-sw-Jav"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yPa-sw-Jav" firstAttribute="trailing" secondItem="Ee8-OU-1H8" secondAttribute="trailing" constant="40" id="66G-Bm-uYW"/>
+                            <constraint firstItem="yPa-sw-Jav" firstAttribute="trailing" secondItem="abP-Q0-opp" secondAttribute="trailing" constant="50" id="4nC-Yi-7dX"/>
                             <constraint firstItem="UrW-th-GGX" firstAttribute="leading" secondItem="yPa-sw-Jav" secondAttribute="leading" id="9oU-kU-EgJ"/>
-                            <constraint firstItem="yPa-sw-Jav" firstAttribute="bottom" secondItem="Ee8-OU-1H8" secondAttribute="bottom" constant="40" id="KHA-BK-coe"/>
+                            <constraint firstItem="yPa-sw-Jav" firstAttribute="bottom" secondItem="abP-Q0-opp" secondAttribute="bottom" constant="50" id="O0m-HB-Mpp"/>
                             <constraint firstItem="UrW-th-GGX" firstAttribute="trailing" secondItem="yPa-sw-Jav" secondAttribute="trailing" id="OFX-Po-7AD"/>
                             <constraint firstItem="yPa-sw-Jav" firstAttribute="trailing" secondItem="W8X-w5-cpI" secondAttribute="trailing" constant="40" id="Tga-MJ-XKp"/>
                             <constraint firstAttribute="bottom" secondItem="UrW-th-GGX" secondAttribute="bottom" id="eav-cU-KGg"/>

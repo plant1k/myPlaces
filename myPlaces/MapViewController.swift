@@ -14,21 +14,19 @@ class MapViewController: UIViewController {
     var place = Place()
     let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
-    
+    let regionMeters = 1000.00
     
     
     @IBOutlet weak var exit: UIButton!
     @IBOutlet weak var mapKit: MKMapView!
     
-    @IBAction func centerCoordinate() {
+
+    @IBAction func centerLocation(_ sender: Any) {
         
-//        if let location = locationManager.location?.coordinate {
-//            let region = MKCoordinateRegion(center: location, latitudinalMeters: 100, longitudinalMeters: 100)
-//            mapKit.setRegion(region, animated: true)
-//            print("Zoom")
-//        } else {
-//            print("error")
-//        }
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionMeters, longitudinalMeters: regionMeters)
+            mapKit.setRegion(region, animated: true)
+        }
     }
     
     @IBAction func exitAction() {
