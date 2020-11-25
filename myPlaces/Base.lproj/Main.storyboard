@@ -122,7 +122,7 @@
                                                     </constraints>
                                                     <state key="normal" image="tool"/>
                                                     <connections>
-                                                        <segue destination="Joa-wc-O0g" kind="presentation" identifier="getAdress" id="xzS-cz-ex9"/>
+                                                        <segue destination="Joa-wc-O0g" kind="presentation" identifier="getAddress" id="xzS-cz-ex9"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -329,7 +329,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="adress" destination="ZTa-a3-TXS" id="qxp-9r-B77"/>
+                        <outlet property="address" destination="ZTa-a3-TXS" id="qxp-9r-B77"/>
                         <outlet property="doneButton" destination="YQr-P9-3TU" id="YqA-ul-52O"/>
                         <outlet property="exit" destination="W8X-w5-cpI" id="QXC-qV-hOy"/>
                         <outlet property="location" destination="hTt-yM-o7p" id="HIg-Fc-oyl"/>
