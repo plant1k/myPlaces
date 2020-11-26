@@ -22,6 +22,12 @@ class MapViewController: UIViewController {
     let regionMeters = 1000.00
     var incomeSegueIdentifier = ""
     var placeCoordinate: CLLocationCoordinate2D?
+    var directionsArray: [MKDirections] = [ ]
+    var previosLocation: CLLocation? {
+        didSet{
+            startTrakingUserLocations()
+        }
+    }
     
     
     @IBOutlet weak var goButton: UIButton!
@@ -30,6 +36,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapKit: MKMapView!
     @IBOutlet weak var location: UIImageView!
     @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var destination: UILabel!
     
 
     @IBAction func doneButtonPressed() {
@@ -47,7 +54,10 @@ class MapViewController: UIViewController {
     }
     
     @IBAction func goButtonPressed() {
+        destination.isHidden = false
         getDirections()
+        
+        
     }
     
     
@@ -66,6 +76,7 @@ class MapViewController: UIViewController {
     private func setupMapView() {
         
         goButton.isHidden = true
+        destination.isHidden = true
         
         if incomeSegueIdentifier == "showPlace" {
             setupPlaceMark()
@@ -73,7 +84,18 @@ class MapViewController: UIViewController {
             address.isHidden = true
             doneButton.isHidden = true
             goButton.isHidden = false
+           
         }
+    }
+    
+    private func resetMapView(withNew directions: MKDirections) {
+        
+        mapKit.removeOverlays(mapKit.overlays)
+        directionsArray.append(directions)
+        
+        let _ = directionsArray.map { $0.cancel() }
+        directionsArray.removeAll()
+        
     }
     
     private func setupPlaceMark() {
@@ -156,16 +178,24 @@ class MapViewController: UIViewController {
     }
     
     private func getDirections() {
+        
+      
+        
         guard  let location = locationManager.location?.coordinate else {
             showAlert(title: "Error", message: "Erorr")
             return
         }
+        
+        locationManager.startUpdatingLocation()
+        previosLocation = CLLocation(latitude: location.latitude, longitude: location.longitude)
+        
         guard let request = createDirectionsRequest(from: location) else {
             showAlert(title: "Error", message: "Not fount")
             return
         }
         
         let directions = MKDirections(request: request)
+        resetMapView(withNew: directions)
         
         directions.calculate { (response, error) in
             if let error = error {
@@ -182,11 +212,12 @@ class MapViewController: UIViewController {
                 
                 
                 let distance = String(format: "%.1f", route.distance / 1000)
-                let timeInterval = route.expectedTravelTime
+                let timeInterval = String(format: "%.1f", route.expectedTravelTime / 60)
                 
-                print("Расстояние до места \(distance), время до места \(timeInterval)")
+                print("Расстояние до места \(distance) км., время до места \(timeInterval) мин. ")
                 
-                
+                self.destination.text = " Расстояние до места \(distance) км., время до места \(timeInterval) мин."
+               
             }
         }
         
@@ -224,6 +255,20 @@ class MapViewController: UIViewController {
             mapKit.setRegion(region, animated: true)
         }
     }
+    
+    private func startTrakingUserLocations() {
+       
+        guard let previosLocation = previosLocation else {return}
+        let center = getCenterLocation(for: mapKit)
+        
+        guard center.distance(from: previosLocation) > 50 else { return }
+            
+        self.previosLocation = center
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            self.showUserLocation()
+        }
+    }
 }
 
 extension MapViewController: MKMapViewDelegate {
@@ -257,6 +302,14 @@ extension MapViewController: MKMapViewDelegate {
         
         let center = getCenterLocation(for: mapView)
         let geocoder = CLGeocoder()
+        
+        if incomeSegueIdentifier == "showPlace" && previosLocation != nil {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                self.showUserLocation()
+            }
+        }
+        
+        geocoder.cancelGeocode()
         
         geocoder.reverseGeocodeLocation(center) { (placemarks, error) in
             if let error = error {
