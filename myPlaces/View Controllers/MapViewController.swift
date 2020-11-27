@@ -125,6 +125,7 @@ extension MapViewController: MKMapViewDelegate {
         return annotationView
     }
     
+    // Центр отображаемой области
     func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         
         let center = mapManager.getCenterLocation(for: mapView)
@@ -165,6 +166,7 @@ extension MapViewController: MKMapViewDelegate {
         }
     }
     
+    // Рисуем маршрут
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = .blue
