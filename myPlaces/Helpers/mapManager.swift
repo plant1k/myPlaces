@@ -10,7 +10,7 @@ import MapKit
 
 class MapManager {
     
- 
+    
     
     let locationManager = CLLocationManager()
     
@@ -19,7 +19,6 @@ class MapManager {
     private var directionsArray: [MKDirections] = [ ]
     
     
-
     func setupLocationManager() {
         //locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
@@ -63,7 +62,7 @@ class MapManager {
         if CLLocationManager.locationServicesEnabled() {
             locationManagerDidChangeAuthorization(manager: locationManager, mapView: mapView, segueIndentifier: segueIdentifier)
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
-           // clouser()
+            // clouser()
             
         } else {
             self.showAlert(title: "Location disabled", message: "Turn on")
@@ -71,7 +70,7 @@ class MapManager {
         
     }
     
-      func showAlert(title: String, message: String) {
+    func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default)
         
@@ -85,11 +84,11 @@ class MapManager {
         
     }
     
-
+    
     
     // Строим маршрут от местоположения пользователя до заведения
     func getDirections(for mapView: MKMapView, previosLocation: (CLLocation) -> ()) {
-
+        
         guard  let location = locationManager.location?.coordinate else {
             showAlert(title: "Error", message: "Erorr")
             return
@@ -125,7 +124,8 @@ class MapManager {
                 
                 print("Расстояние до места \(distance) км., время до места \(timeInterval) мин. ")
                 
-                //destination.text = " Расстояние до места \(distance) км., время до места \(timeInterval) мин."
+                
+                
                 
             }
         }
@@ -133,7 +133,7 @@ class MapManager {
     }
     
     // Определение центра отображаемой области карты
-     func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+    func getCenterLocation(for mapView: MKMapView) -> CLLocation {
         
         let latitude = mapView.centerCoordinate.latitude
         let longitude = mapView.centerCoordinate.longitude
@@ -151,8 +151,8 @@ class MapManager {
             print("Error")
         }
     }
-     // Настройка запроса для расчета маршрута
-     func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
+    // Настройка запроса для расчета маршрута
+    func createDirectionsRequest(from coordinate: CLLocationCoordinate2D) -> MKDirections.Request? {
         
         guard let destinationCoordinate = placeCoordinate else { return nil }
         
@@ -180,7 +180,7 @@ class MapManager {
         
     }
     
-
+    
     
     
     // Сброс всех ранее построенных маршрутов перед построением нового
@@ -214,8 +214,8 @@ class MapManager {
             print("New case")
         }
     }
-
- 
+    
+    
 }
 
 
