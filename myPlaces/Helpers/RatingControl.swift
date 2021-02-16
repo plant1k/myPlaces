@@ -9,8 +9,7 @@ import UIKit
 
 @IBDesignable class RatingControl: UIStackView {
     
-    //MARK: Properties
-    
+    //MARK: - Properties
     private var ratingButtons = [UIButton]()
     var rating = 0 {
         didSet {
@@ -23,13 +22,14 @@ import UIKit
             setupButtons()
         }
     }
+    
     @IBInspectable var starCount: Int = 5 {
         didSet{
             setupButtons()
         }
     }
     
-    //MARK: Initialization
+    //MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,27 +47,20 @@ import UIKit
         guard let index = ratingButtons.firstIndex(of: button) else {return}
         
         //Calculate rating
-        
         let selectedRating = index + 1
-        
         if selectedRating == rating {
             rating = 0
         } else {
             rating = selectedRating
         }
-        
     }
     
-    
-    //MARK: Privete Metods
-    
+    //MARK: - Privete Metods
     private func setupButtons() {
-        
         for button in ratingButtons {
             removeArrangedSubview(button)
             button.removeFromSuperview()
         }
-        
         ratingButtons.removeAll()
         
         // Load button image
@@ -76,10 +69,8 @@ import UIKit
         let emptyStar = UIImage(named: "emptyStar", in: bundle, compatibleWith: self.traitCollection)
         let highlighterStar = UIImage(named: "highlightedStar", in: bundle, compatibleWith: self.traitCollection)
         
-        
-        
         for _ in 0..<starCount {
-            
+    
             //Create button
             let button = UIButton()
             //Set button image
@@ -101,7 +92,6 @@ import UIKit
             
             //Add new button
             ratingButtons.append(button)
-            
         }
         updateButtonSelectionState()
     }
@@ -110,8 +100,6 @@ import UIKit
         for (index, button) in ratingButtons.enumerated() {
             button.isSelected = index < rating
         }
-        
     }
-    
 }
                                     

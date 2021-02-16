@@ -8,14 +8,8 @@
 import UIKit
 import Cosmos
 
-class CustomTableViewCell: UITableViewCell {
+final class CustomTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var imageOfPlase: UIImageView! {
-        didSet {
-            imageOfPlase.layer.cornerRadius = imageOfPlase.frame.size.height / 2
-            imageOfPlase.clipsToBounds = true
-        }
-    }
     @IBOutlet weak var nameLable: UILabel!
     @IBOutlet weak var locationLable: UILabel!
     @IBOutlet weak var typeLable: UILabel!
@@ -25,5 +19,10 @@ class CustomTableViewCell: UITableViewCell {
         }
     }
     
-
+    @IBOutlet weak var imageOfPlase: UIImageView! {
+        didSet {
+            imageOfPlase.layer.cornerRadius = imageOfPlase.frame.size.height / 2
+            imageOfPlase.clipsToBounds = true
+        }
+    }
 }

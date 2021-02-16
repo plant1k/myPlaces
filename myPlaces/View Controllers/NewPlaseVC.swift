@@ -24,7 +24,6 @@ class NewPlaseVC: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         
         saveButton.isEnabled = false
@@ -32,7 +31,6 @@ class NewPlaseVC: UITableViewController {
         
         setupEditScreen()
         
-      
         cosmos.didTouchCosmos = { rating in
             self.currentRating = rating
         }
@@ -50,7 +48,6 @@ class NewPlaseVC: UITableViewController {
                                                 preferredStyle: .actionSheet)
             
             let camera = UIAlertAction(title: "Camera", style: .default) { _ in
-                
                 let cameraAlert = UIAlertController(title: "Camera", message: "Camera not found", preferredStyle: .alert)
                 let okAllert = UIAlertAction(title: "OK", style: .cancel)
                 cameraAlert.addAction(okAllert)
@@ -72,36 +69,29 @@ class NewPlaseVC: UITableViewController {
             actionSheet.addAction(cancel)
             
             present(actionSheet, animated: true)
-            
         } else {
             view.endEditing(true)
         }
     }
     
-    //MARK: Navigation
-    
+    //MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        guard
-            let identifier = segue.identifier,
-            let mapVC = segue.destination as? MapViewController else { return }
+        guard let identifier = segue.identifier, let mapVC = segue.destination as? MapViewController else { return }
         
         mapVC.incomeSegueIdentifier = identifier
         mapVC.mapViewControllerDelegate = self
         
-        
         if identifier == "showPlace" {
-            
             mapVC.place.name = placeName.text!
             mapVC.place.location = placeLocation.text
             mapVC.place.type = placeType.text
             mapVC.place.imageData = placeImage.image?.pngData()
         }
     }
+    
     func savePlace() {
-        
         let image = imageIsChanged ? placeImage.image : #imageLiteral(resourceName: "imagePlaceholder")
-
+        
         let imageData = image?.pngData()
         
         let newPlace = Place(name: placeName.text!, location: placeLocation.text, type: placeType.text, imageData: imageData, rating: currentRating)
@@ -123,6 +113,7 @@ class NewPlaseVC: UITableViewController {
         if currentPlace != nil {
             imageIsChanged = true
             setupNavBar()
+            
             guard let data = currentPlace?.imageData, let image = UIImage(data: data) else {return}
             placeImage.image = image
             placeImage.contentMode = .scaleAspectFill
@@ -147,15 +138,11 @@ class NewPlaseVC: UITableViewController {
     }
 }
 
-
-// MARK: Text Fiels Delegate
-
+// MARK: - Text Fiels Delegate
 extension NewPlaseVC: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
         textField.resignFirstResponder()
-        
         return true
     }
     
@@ -168,13 +155,9 @@ extension NewPlaseVC: UITextFieldDelegate {
     }
 }
 
-
-//MARK: Work with Image
-
+//MARK: - Work with Image
 extension NewPlaseVC: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
     func chooseImagePicker(source: UIImagePickerController.SourceType) {
-        
         if UIImagePickerController.isSourceTypeAvailable(source) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
@@ -193,11 +176,9 @@ extension NewPlaseVC: UIImagePickerControllerDelegate, UINavigationControllerDel
         
         dismiss(animated: true)
     }
-    
 }
 
 extension NewPlaseVC: MapViewControllerDelegate {
-    
     func getAddress(_ address: String?) {
         placeLocation.text = address
     }

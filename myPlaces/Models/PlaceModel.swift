@@ -16,7 +16,6 @@ class Place: Object {
     @objc dynamic var date = Date()
     @objc dynamic var rating = 0.0
     
-    
     convenience init(name:String, location:String?, type:String?, imageData:Data?, rating:Double) {
         self.init()
         self.name = name
